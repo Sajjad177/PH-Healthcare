@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Basic route
-app.get('/', (req: Request, res: Response) => {
+app.get('/', async (req: Request, res: Response) => {
   res.send('Hello, TypeScript + Express!');
 });
 
