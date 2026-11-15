@@ -14,25 +14,25 @@ export const auth = betterAuth({
     additionalFields: {
       role: {
         type: 'string',
-        required: true,
+        required: false,
         default: Role.PATIENT,
       },
 
       status: {
         type: 'string',
-        required: true,
+        required: false,
         default: userStatus.ACTIVE,
       },
 
       needPasswordChange: {
         type: 'boolean',
-        required: true,
+        required: false,
         default: false,
       },
 
       isDeleted: {
         type: 'boolean',
-        required: true,
+        required: false,
         default: false,
       },
 
@@ -42,5 +42,10 @@ export const auth = betterAuth({
         default: null,
       },
     },
+  },
+
+  trustedOrigin: process.env.TRUSTED_ORIGIN || 'http://localhost:5000',
+  advanced: {
+    disableCSRFCheck: true,
   },
 });
