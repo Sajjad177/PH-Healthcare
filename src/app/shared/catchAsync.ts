@@ -5,12 +5,7 @@ const catchAsync = (fn: RequestHandler) => {
     try {
       await fn(req, res, next);
     } catch (error: any) {
-      console.error('Error:', error);
-      res.status(500).json({
-        status: 'false',
-        message: 'Failed to fetch',
-        error: error.message || 'An error occurred',
-      });
+      next(error);
     }
   };
 };
