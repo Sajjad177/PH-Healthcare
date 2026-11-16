@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import doctorController from './user.controller';
+import userController from './user.controller';
 
 const router = Router();
 
-router.post('/register', doctorController.createDoctor);
+router.post('/register', userController.createDoctor);
 
 const userRouter = router;
 export default userRouter;

@@ -126,11 +126,11 @@ const deleteDoctor = async () => {
   // Implementation for deleting a doctor
 };
 
-const doctorService = {
+const userService = {
   createDoctor,
   getAllDoctors,
   updateDoctor,
   deleteDoctor,
 };
 
-export default doctorService;
+export default userService;
