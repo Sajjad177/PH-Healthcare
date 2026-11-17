@@ -78,8 +78,6 @@ const loginUser = async (payload: { email: string; password: string }) => {
   return data;
 };
 
-//! next start in milestone: 6 module : 38
-
 const authService = {
   registerPatient,
   loginUser,
