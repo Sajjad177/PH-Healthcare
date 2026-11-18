@@ -58,7 +58,6 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Doctor: 'Doctor',
-  DoctorSchedules: 'DoctorSchedules',
   MedicalReport: 'MedicalReport',
   Patient: 'Patient',
   PatientHealthData: 'PatientHealthData',
@@ -66,6 +65,7 @@ export const ModelName = {
   Prescription: 'Prescription',
   Review: 'Review',
   Schedule: 'Schedule',
+  DoctorSchedules: 'DoctorSchedules',
   Specialty: 'Specialty',
   DoctorSpecialty: 'DoctorSpecialty'
 } as const
@@ -103,14 +103,15 @@ export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof Ad
 
 export const AppointmentScalarFieldEnum = {
   id: 'id',
-  patientId: 'patientId',
-  doctorId: 'doctorId',
-  doctorScheduleId: 'doctorScheduleId',
   videoCallingId: 'videoCallingId',
   status: 'status',
   paymentStatus: 'paymentStatus',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  patientId: 'patientId',
+  doctorId: 'doctorId',
+  scheduleId: 'scheduleId',
+  medicalReportId: 'medicalReportId'
 } as const
 
 export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
@@ -205,28 +206,14 @@ export const DoctorScalarFieldEnum = {
 export type DoctorScalarFieldEnum = (typeof DoctorScalarFieldEnum)[keyof typeof DoctorScalarFieldEnum]
 
 
-export const DoctorSchedulesScalarFieldEnum = {
-  id: 'id',
-  doctorId: 'doctorId',
-  scheduleId: 'scheduleId',
-  isBooked: 'isBooked',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type DoctorSchedulesScalarFieldEnum = (typeof DoctorSchedulesScalarFieldEnum)[keyof typeof DoctorSchedulesScalarFieldEnum]
-
-
 export const MedicalReportScalarFieldEnum = {
   id: 'id',
-  patientId: 'patientId',
-  doctorId: 'doctorId',
-  appointmentId: 'appointmentId',
-  diagnosis: 'diagnosis',
-  treatment: 'treatment',
-  followUpDate: 'followUpDate',
+  reportName: 'reportName',
+  reportLink: 'reportLink',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  patientId: 'patientId',
+  doctorId: 'doctorId'
 } as const
 
 export type MedicalReportScalarFieldEnum = (typeof MedicalReportScalarFieldEnum)[keyof typeof MedicalReportScalarFieldEnum]
@@ -240,6 +227,7 @@ export const PatientScalarFieldEnum = {
   contactNumber: 'contactNumber',
   address: 'address',
   isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
@@ -250,7 +238,6 @@ export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeo
 
 export const PatientHealthDataScalarFieldEnum = {
   id: 'id',
-  patientId: 'patientId',
   gender: 'gender',
   dateOfBirth: 'dateOfBirth',
   bloodGroup: 'bloodGroup',
@@ -268,7 +255,8 @@ export const PatientHealthDataScalarFieldEnum = {
   recentDepression: 'recentDepression',
   maritalStatus: 'maritalStatus',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  patientId: 'patientId'
 } as const
 
 export type PatientHealthDataScalarFieldEnum = (typeof PatientHealthDataScalarFieldEnum)[keyof typeof PatientHealthDataScalarFieldEnum]
@@ -276,15 +264,13 @@ export type PatientHealthDataScalarFieldEnum = (typeof PatientHealthDataScalarFi
 
 export const PaymentScalarFieldEnum = {
   id: 'id',
-  appointmentId: 'appointmentId',
   amount: 'amount',
   transactionId: 'transactionId',
   status: 'status',
-  paymentMethod: 'paymentMethod',
-  paymentGateway: 'paymentGateway',
-  paidAt: 'paidAt',
+  paymentGatewayData: 'paymentGatewayData',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  appointmentId: 'appointmentId'
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
@@ -292,14 +278,13 @@ export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeo
 
 export const PrescriptionScalarFieldEnum = {
   id: 'id',
+  followUpDate: 'followUpDate',
+  instructions: 'instructions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   appointmentId: 'appointmentId',
   patientId: 'patientId',
-  doctorId: 'doctorId',
-  instructions: 'instructions',
-  diagnosis: 'diagnosis',
-  followUpDate: 'followUpDate',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  doctorId: 'doctorId'
 } as const
 
 export type PrescriptionScalarFieldEnum = (typeof PrescriptionScalarFieldEnum)[keyof typeof PrescriptionScalarFieldEnum]
@@ -307,13 +292,13 @@ export type PrescriptionScalarFieldEnum = (typeof PrescriptionScalarFieldEnum)[k
 
 export const ReviewScalarFieldEnum = {
   id: 'id',
-  patientId: 'patientId',
-  doctorId: 'doctorId',
-  appointmentId: 'appointmentId',
   rating: 'rating',
   comment: 'comment',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  appointmentId: 'appointmentId',
+  patientId: 'patientId',
+  doctorId: 'doctorId'
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
@@ -323,11 +308,24 @@ export const ScheduleScalarFieldEnum = {
   id: 'id',
   startDate: 'startDate',
   endDate: 'endDate',
+  startTime: 'startTime',
+  endTime: 'endTime',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ScheduleScalarFieldEnum = (typeof ScheduleScalarFieldEnum)[keyof typeof ScheduleScalarFieldEnum]
+
+
+export const DoctorSchedulesScalarFieldEnum = {
+  doctorId: 'doctorId',
+  scheduleId: 'scheduleId',
+  isBooked: 'isBooked',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DoctorSchedulesScalarFieldEnum = (typeof DoctorSchedulesScalarFieldEnum)[keyof typeof DoctorSchedulesScalarFieldEnum]
 
 
 export const SpecialtyScalarFieldEnum = {
@@ -365,6 +363,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -379,4 +385,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

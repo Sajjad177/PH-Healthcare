@@ -7,7 +7,7 @@
     "start": "node init && node dist/server.js",
     "build": "node init && tsc",
     "lint": "eslint ./src/**/*",
-    "dev": "tsx watch src/server.ts",
+    "dev": "node init && tsx watch src/server.ts",
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",
     "study": "prisma studio",
