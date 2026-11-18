@@ -1,0 +1,17 @@
+model Prescription {
+  id            String    @id @default(uuid())
+  appointmentId String    @unique @db.Uuid
+  patientId     String
+  doctorId      String
+  instructions  String?
+  diagnosis     String?
+  followUpDate  DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  appointment Appointment @relation(fields: [appointmentId], references: [id])
+  patient     Patient     @relation(fields: [patientId], references: [id])
+  doctor      Doctor      @relation(fields: [doctorId], references: [id])
+
+  @@map("prescriptions")
+}
