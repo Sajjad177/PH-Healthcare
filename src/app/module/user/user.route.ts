@@ -11,5 +11,7 @@ router.post(
   userController.createDoctor,
 );
 
+router.post('/admin', userController.createAdmin);
+
 const userRouter = router;
 export default userRouter;

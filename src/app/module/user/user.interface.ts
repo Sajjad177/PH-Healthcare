@@ -20,3 +20,15 @@ export interface ICreateDoctor {
   };
   specialty: string[];
 }
+
+// Add this interface to user.interface.ts
+
+export interface ICreateAdmin {
+  password: string;
+  admin: {
+    name: string;
+    email: string;
+    profilePhoto?: string;
+    contactNumber: string;
+  };
+}

@@ -3,6 +3,7 @@ import specialtyRouter from '../module/specialty/specialty.router';
 import authRouter from '../module/auth/auth.router';
 import userRouter from '../module/user/user.route';
 import doctorRouter from '../module/doctor/doctor.route';
+import adminRouter from '../module/admin/admin.router';
 
 const router = Router();
 
@@ -10,6 +11,7 @@ router.use('/specialty', specialtyRouter);
 router.use('/auth', authRouter);
 router.use('/user', userRouter);
 router.use('/doctor', doctorRouter);
+router.use('/admin', adminRouter);
 
 export const indexRouter = router;
 
